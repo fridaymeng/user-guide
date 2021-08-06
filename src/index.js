@@ -1,8 +1,4 @@
 const userGuide = function (guider) {
-  const leftImg = require('@/assets/hand-o-left.png')
-  const rightImg = require('@/assets/hand-o-right.png')
-  const topImg = require('@/assets/hand-o-top.png')
-  const bottomImg = require('@/assets/hand-o-bottom.png')
   const bodyStyleOverflow = document.getElementsByTagName('body')[0].style.overflow
   const guiderObject = {}
   if (guider.deleteAll) {
@@ -26,7 +22,11 @@ const userGuide = function (guider) {
     const element = document.querySelector(params.element)
     // 是否已经跳过
     const hasskiped = localStorage.getItem('#user-guide-skiped')
-    if (!element || !!hasskiped) return
+    if (!!hasskiped) {
+      guiderObject[params.index + 1] && handleldElement(guiderObject[params.index + 1])
+      return
+    }
+    if (!element) return
     const style = element.getAttribute('style')
     element.setAttribute('style', `${style}display: inherit!important;`)
     // element.setAttribute('style', `${style}display: inherit!important;z-index:9999999!important;positon:relative;`)
@@ -66,7 +66,7 @@ const userGuide = function (guider) {
   }
   // 记录是否已被查看
   function setLocalItem (name, val) {
-    localStorage.setItem(name, val)
+    // localStorage.setItem(name, val)
   }
   function renderOverLay () {
     const overLay = document.createElement('div')
@@ -94,28 +94,28 @@ const userGuide = function (guider) {
     document.body.appendChild(overLay)
   }
   function renderRerLayer (params) {
-    let imgUrl = bottomImg
     let contentLeft = params.left
+    let overLayCtsLeftImgStyle = ''
     if (params.type === 'left') {
-      imgUrl = leftImg
+      overLayCtsLeftImgStyle = 'border: 10px solid transparent; border-right-color: #fff; margin: 17px 0 0 0;'
       contentLeft += params.width
     }
     let contentRight = params.right
     if (params.type === 'right') {
-      imgUrl = rightImg
+      overLayCtsLeftImgStyle = 'border: 10px solid transparent; border-left-color: #fff; margin: 17px 0 0 0;'
       contentRight += params.width + 5
       contentLeft = 'auto'
     }
     let contentTop = params.top
     if (params.type === 'top') {
       contentRight = 'auto'
-      imgUrl = topImg
+      overLayCtsLeftImgStyle = 'border: 15px solid transparent; border-bottom-color: #fff; margin: 0 0 0 0;'
       contentTop += params.height
     }
     const contentBottom = 'auto'
     // 内容区域高度
     if (params.type === 'bottom') {
-      imgUrl = bottomImg
+      overLayCtsLeftImgStyle = 'border: 15px solid transparent; border-top-color: #fff; margin: 0 0 0 0;'
       contentTop -= params.height + params.contextHeight
     }
     const contentHeight = params.height
@@ -157,24 +157,20 @@ const userGuide = function (guider) {
     // 遮罩层
     const overLayCts = document.createElement('div')
     const overLayCtsLeft = document.createElement('div')
-    let overLayCtsLeftStyle = 'width:30px;height:40px;overflow:hidden;'
+    let overLayCtsLeftStyle = 'width:30px;height:25px;overflow:hidden;padding: 0 0 0 15px;'
     if (['left', 'right'].includes(params.type)) {
       overLayCtsLeftStyle = `float:${params.type};`
     }
     overLayCtsLeft.setAttribute('style', overLayCtsLeftStyle)
-    let overLayCtsLeftImgStyle = 'color: #fff;'
     let contextHeightStyle = ''
     if (params.type === 'bottom') {
       contextHeightStyle = `height: ${params.contextHeight}px;`
-      overLayCtsLeftImgStyle += ''
-    } else {
-      overLayCtsLeftImgStyle += 'margin-top: 10px;'
     }
-    overLayCtsLeft.innerHTML = `<img src=${imgUrl} style="${overLayCtsLeftImgStyle}" />`
+    overLayCtsLeft.innerHTML = `<div style="${overLayCtsLeftImgStyle}"></div>`
     const overLayCtsRight = document.createElement('div')
     let overLayCtsRightStyle = ''
     if (['left', 'right'].includes(params.type)) {
-      overLayCtsRightStyle = `margin-${params.type}:30px;`
+      overLayCtsRightStyle = `margin-${params.type}:20px;`
     }
     overLayCtsRight.setAttribute('style', overLayCtsRightStyle)
     const overLayCtsRightContent = document.createElement('div')
@@ -195,9 +191,11 @@ const userGuide = function (guider) {
     }
     overLay.appendChild(overLayCts)
     document.body.appendChild(overLay)
-    setTimeout(() => {
-      document.getElementsByTagName('body')[0].style.overflow = 'hidden'
-    }, 0)
+    document.getElementsByTagName('body')[0].style.overflow = 'hidden'
   }
 }
-export default userGuide
+window.userGuide = userGuide
+// export default userGuide
+/* module.exports = {
+  userGuide
+} */

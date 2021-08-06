@@ -1,4 +1,5 @@
 ### For New User Guide
+> You can install User-guide in a few simple steps. 
 #### How To Use?
 ```js
 import userGuide from './src/index.js'
@@ -28,4 +29,12 @@ userGuide([
     content: `This is a introduction.`
   }
 ])
+```
+
+```js 
+userGuide({
+    element: '#user-guide-id1',
+    position: 'left',
+    content: `This is a introduction.`
+})
 ```

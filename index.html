@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="src/index.js"></script>
+</head>
+<body style="margin: 0; padding: 0;">
+  <div style="padding: 100px;">
+    <button style="float: left;" id="user-guide-confirm-left">confirm</button>
+    <button style="float: right;" id="user-guide-confirm-right">confirm</button>
+  </div>
+  <div style="padding: 300px 100px 100px;">
+    <button id="user-guide-confirm-top">confirm</button>
+    <button style="margin: 0 0 0 500px;" id="user-guide-confirm-bottom">confirm</button>
+  </div>
+  <script>
+    // import userGuide from './src/index.js'
+    userGuide([
+      {
+          element: '#user-guide-confirm-left',
+          position: 'left',
+          content: `This is a introduction.`
+      },
+      {
+          element: '#user-guide-confirm-right',
+          position: 'right',
+          content: `This is a introduction.`
+      },
+      {
+          element: '#user-guide-confirm-top',
+          position: 'top',
+          content: `This is a introduction.`
+      },
+      {
+          element: '#user-guide-confirm-bottom',
+          position: 'bottom',
+          contextHeight: 110,
+          content: `This is a introduction.`
+      }
+    ])
+  </script>
+</body>
+</html>
