@@ -30,7 +30,7 @@ userGuide([
   }
 ])
 ```
-
+OR
 ```js 
 userGuide({
     element: '#user-guide-id1',
