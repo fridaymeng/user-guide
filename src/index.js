@@ -94,6 +94,9 @@ const userGuide = function (guider) {
     document.body.appendChild(overLay)
   }
   function renderRerLayer (params) {
+    // 内容区域高度
+    const contextHeightStyle = params.contextHeight || 90
+    const arrowHeight = 25
     let contentLeft = params.left
     let overLayCtsLeftImgStyle = ''
     if (params.type === 'left') {
@@ -116,7 +119,7 @@ const userGuide = function (guider) {
     // 内容区域高度
     if (params.type === 'bottom') {
       overLayCtsLeftImgStyle = 'border: 10px solid transparent; border-top-color: #fff; margin: 0 0 0 0; width: 0px;'
-      contentTop -= params.height + params.contextHeight + 30
+      contentTop -= params.height + contextHeightStyle + arrowHeight
     }
     const contentHeight = params.height
     const overLay = document.createElement('div')
@@ -157,15 +160,11 @@ const userGuide = function (guider) {
     // 遮罩层
     const overLayCts = document.createElement('div')
     const overLayCtsLeft = document.createElement('div')
-    let overLayCtsLeftStyle = 'width:30px;height:25px;overflow:hidden;padding: 0 0 0 15px;'
+    let overLayCtsLeftStyle = `width:30px;height:${arrowHeight}px;overflow:hidden;padding: 0 0 0 15px;`
     if (['left', 'right'].includes(params.type)) {
       overLayCtsLeftStyle = `float:${params.type};`
     }
     overLayCtsLeft.setAttribute('style', overLayCtsLeftStyle)
-    let contextHeightStyle = ''
-    if (params.type === 'bottom') {
-      contextHeightStyle = `height: ${params.contextHeight}px;`
-    }
     overLayCtsLeft.innerHTML = `<div style="${overLayCtsLeftImgStyle}"></div>`
     const overLayCtsRight = document.createElement('div')
     let overLayCtsRightStyle = ''
@@ -174,7 +173,7 @@ const userGuide = function (guider) {
     }
     overLayCtsRight.setAttribute('style', overLayCtsRightStyle)
     const overLayCtsRightContent = document.createElement('div')
-    overLayCtsRightContent.setAttribute('style', `background: #fff;${contextHeightStyle} padding: 15px; border-radius: 5px;font-size: 24px;`)
+    overLayCtsRightContent.setAttribute('style', `background: #fff;overflow-y: auto;height: ${contextHeightStyle}px;padding: 15px; border-radius: 5px;font-size: 24px;`)
     overLayCtsRightContent.innerHTML = `<div style="padding: 0 0 15px;">${params.content}</div>`
     nextButton && overLayCtsRightContent.appendChild(nextButton)
     if (!params.hasNext) {

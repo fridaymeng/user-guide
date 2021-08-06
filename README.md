@@ -25,7 +25,7 @@ userGuide([
   {
     element: '#user-guide-id4',
     position: 'bottom',
-    contextHeight: 120, // if the postion is 'bottom', you must set this contextHeight.
+    contextHeight: 120, // you can set the context area height.
     content: `This is a introduction.`
   }
 ])
