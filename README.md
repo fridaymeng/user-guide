@@ -1,9 +1,11 @@
 ### For New User Guide
 #### How To Use?
-> import userGuide from './src/index.js'
+```js
+import userGuide from './src/index.js'
+```
 
 ```js 
-this.userGuide([
+userGuide([
   {
     element: '#user-guide-id1',
     position: 'left',
