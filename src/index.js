@@ -115,8 +115,8 @@ const userGuide = function (guider) {
     const contentBottom = 'auto'
     // 内容区域高度
     if (params.type === 'bottom') {
-      overLayCtsLeftImgStyle = 'border: 15px solid transparent; border-top-color: #fff; margin: 0 0 0 0;'
-      contentTop -= params.height + params.contextHeight
+      overLayCtsLeftImgStyle = 'border: 10px solid transparent; border-top-color: #fff; margin: 0 0 0 0; width: 0px;'
+      contentTop -= params.height + params.contextHeight + 30
     }
     const contentHeight = params.height
     const overLay = document.createElement('div')
@@ -128,7 +128,7 @@ const userGuide = function (guider) {
     let nextButton = null
     if (params.hasNext) {
       nextButton = document.createElement('button')
-      nextButton.innerText = '下一步'
+      nextButton.innerText = 'Next'
       nextButton.setAttribute('style', 'margin: 0 12px 0 0;border: 1px solid #1890ff; background: #1890ff; color: #fff; font-size: 16px; padding: 5px 10px;cursor: pointer; border-radius: 3px;')
       nextButton.onmousedown = () => {
         setLocalItem(params.element, true)
@@ -138,7 +138,7 @@ const userGuide = function (guider) {
     }
     // 跳过新手引导
     const skipButton = document.createElement('button')
-    skipButton.innerText = '跳过新手引导'
+    skipButton.innerText = 'skip guide.'
     skipButton.setAttribute('style', 'cursor: pointer;font-size: 16px; padding: 5px 10px; background: #fff; color: #666; border: 1px solid #ddd;')
     skipButton.onmousedown = () => {
       setLocalItem('#user-guide-skiped', true)
@@ -147,7 +147,7 @@ const userGuide = function (guider) {
     }
     // 我知道了
     const iKnowButton = document.createElement('button')
-    iKnowButton.innerText = '我知道了'
+    iKnowButton.innerText = 'i know.'
     iKnowButton.setAttribute('style', 'cursor: pointer;margin: 0 12px 0 0;font-size: 16px; padding: 5px 10px; border: 1px solid #1890ff; background: #1890ff; color: #fff;')
     iKnowButton.onmousedown = () => {
       setLocalItem(params.element, true)
