@@ -1,5 +1,5 @@
 const userGuide = function (guider) {
-  const bodyStyleOverflow = document.getElementsByTagName('body')[0].style.overflow
+  // const bodyStyleOverflow = document.getElementsByTagName('body')[0].style.overflow
   const guiderObject = {}
   if (guider.deleteAll) {
     deleteAll()
@@ -29,6 +29,7 @@ const userGuide = function (guider) {
     if (!element) return
     const style = element.getAttribute('style')
     element.setAttribute('style', `${style}display: inherit!important;`)
+    // 是否需要按钮可点击
     // element.setAttribute('style', `${style}display: inherit!important;z-index:9999999!important;positon:relative;`)
     const rect = element.getBoundingClientRect()
     const bodyWidth = document.body.offsetWidth
@@ -57,8 +58,9 @@ const userGuide = function (guider) {
     renderHelpLayer(params)
     renderRerLayer(params)
   }
+  // 删除用户引导
   function deleteAll () {
-    document.getElementsByTagName('body')[0].style.overflow = bodyStyleOverflow
+    // document.getElementsByTagName('body')[0].style.overflow = bodyStyleOverflow
     const overlayArr = document.querySelectorAll('.guide-over-lay, .guide-help-layer, .guide-rer-layer')
     overlayArr.forEach(item => {
       document.body.removeChild(item)
@@ -68,12 +70,14 @@ const userGuide = function (guider) {
   function setLocalItem (name, val) {
     // localStorage.setItem(name, val)
   }
+  // 透明遮罩层
   function renderOverLay () {
     const overLay = document.createElement('div')
     overLay.setAttribute('class', 'guide-over-lay')
     overLay.setAttribute('style', 'top:0;inset: 0px;position: fixed;cursor: pointer;box-sizing: content-box;z-index: 999999;opacity: 0;')
     document.body.appendChild(overLay)
   }
+  // 灰色遮罩层
   function renderHelpLayer (params) {
     const overLay = document.createElement('div')
     overLay.setAttribute('class', 'guide-help-layer')
@@ -93,6 +97,7 @@ const userGuide = function (guider) {
     overLay.setAttribute('style', style)
     document.body.appendChild(overLay)
   }
+  // 引导内容层
   function renderRerLayer (params) {
     // 内容区域高度
     const contextHeightStyle = params.contextHeight || 90
